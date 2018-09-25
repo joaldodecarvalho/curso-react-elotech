@@ -1,21 +1,45 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Route, withRouter } from 'react-router-dom'
+import { Switch } from 'react-router'
+
 import './App.css';
 
+import Header from './Header';
+import Home from './Home'
+import Configuracao from './Configuracao';
+
 class App extends Component {
+
+  constructor() {
+    super()
+    this.state = { logado: false }
+  }
+
+
+  onLogin = () => {
+    this.setState({ logado: true })
+  }
+
+  onLogout = () => {
+    this.setState({ logado: false })
+    this.props.history.push('/')
+  }
+
   render() {
+
+    const { logado } = this.state;
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Header logado={logado} onLogin={this.onLogin} onLogout={this.onLogout}></Header>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/configuracao" component={Configuracao} />
+        </Switch>
       </div>
     );
   }
 }
 
-export default App;
+
+export default withRouter(App);
