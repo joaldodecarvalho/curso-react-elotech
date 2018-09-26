@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { Container, Button } from 'react-bootstrap'
+import { Container, Button, Form } from 'react-bootstrap'
+
+import Posts from './Posts'
 
 class Home extends Component {
 
@@ -26,22 +28,35 @@ class Home extends Component {
         const { usuario, username, mensagem } = this.state;
 
         this.setState({
-            posts: [...this.state.posts, { usuario: usuario, username: username, mensagem: mensagem, data: new Date() }]
+            posts: [...this.state.posts,
+            { usuario, username, mensagem, data: new Date()}]
         })
     }
 
     render() {
 
+        const { posts } = this.state;
+
         return (
-            <Container>
-                <textarea rows="5" cols="100" name="mensagem" onChange={this.onChangeMensagem} />
+            <Container style={style}>
+                <Form>
+                    <Form.Group controlId="exampleForm.ControlTextarea1">
+                        <Form.Label>Escreva aqui seu Tweet</Form.Label>
+                        <Form.Control as="textarea" rows="3" onChange={this.onChangeMensagem} />
+                    </Form.Group>
+                </Form>
+
                 <Button onClick={this.postar}>Postar</Button>
 
-                {this.state.posts}
+                <Posts posts={posts}></Posts>
             </Container>
         )
     }
 
+}
+
+const style = {
+    paddingTop: 20
 }
 
 export default Home;
