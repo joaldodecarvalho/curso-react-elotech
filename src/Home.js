@@ -11,25 +11,26 @@ class Home extends Component {
         this.state = {
             usuario: 'joaldo',
             username: '@joaldo',
+            urlPhoto: 'http://i.imgur.com/xaWpElq.png',
             mensagem: '',
             posts: []
         }
     }
 
-    onChangeMensagem = (event) => {
+    onChangeMensagem = event => {
         const { value } = event.target;
 
         this.setState({
-            'mensagem': value
+            mensagem: value
         })
     }
 
     postar = () => {
-        const { usuario, username, mensagem } = this.state;
+        const { usuario, username, mensagem, urlPhoto } = this.state;
 
         this.setState({
             posts: [...this.state.posts,
-            { usuario, username, mensagem, data: new Date()}]
+            { usuario, username, mensagem, urlPhoto, data: new Date() }]
         })
     }
 
@@ -40,9 +41,8 @@ class Home extends Component {
         return (
             <Container style={style}>
                 <Form>
-                    <Form.Group controlId="exampleForm.ControlTextarea1">
-                        <Form.Label>Escreva aqui seu Tweet</Form.Label>
-                        <Form.Control as="textarea" rows="3" onChange={this.onChangeMensagem} />
+                    <Form.Group>
+                        <Form.Control as="textarea" rows="3" onChange={this.onChangeMensagem} placeholder="Escreva aqui seu Tweet" />
                     </Form.Group>
                 </Form>
 
@@ -52,7 +52,6 @@ class Home extends Component {
             </Container>
         )
     }
-
 }
 
 const style = {

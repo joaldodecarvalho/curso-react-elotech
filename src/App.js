@@ -7,6 +7,7 @@ import './App.css';
 import Header from './Header';
 import Home from './Home'
 import Configuracao from './Configuracao';
+import Perfil from './Perfil';
 
 class App extends Component {
 
@@ -14,7 +15,6 @@ class App extends Component {
     super()
     this.state = { logado: false }
   }
-
 
   onLogin = () => {
     this.setState({ logado: true })
@@ -35,11 +35,11 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/configuracao" component={Configuracao} />
+          <Route exact path="/perfil" component={Perfil} />
         </Switch>
       </div>
     );
   }
 }
-
 
 export default withRouter(App);
